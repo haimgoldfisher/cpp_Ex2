@@ -5,18 +5,25 @@
 using namespace std;
 
 #include "player.hpp"
-using namespace ariel;
 
-Player::Player(string newName = "Unknown Player")
+namespace ariel
 {
-    this->name = newName;
-}
+    Player::Player()
+    {
+        this->name = "Unknown Player";
+    }
 
-int Player::stacksize()
-{
-    return this->stackSize;
-}
-int Player::cardesTaken()
-{
-    return this->cardsTaken;
+    Player::Player(string newName)
+    {
+        this->name = newName;
+    }
+
+    int Player::stacksize()
+    {
+        return this->stackSize;
+    }
+    int Player::cardesTaken()
+    {
+        return this->cardsTaken;
+    }
 }

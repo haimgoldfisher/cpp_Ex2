@@ -1,8 +1,16 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
 using namespace std;
+
+#include "game.hpp"
+#include "player.hpp"
+#include "card.hpp"
+using namespace ariel;
 
 namespace ariel
 {
@@ -28,3 +36,5 @@ namespace ariel
         void printStats();
     };
 }
+
+#endif
