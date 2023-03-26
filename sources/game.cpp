@@ -9,10 +9,9 @@ using namespace std;
 
 namespace ariel
 {
-    Game::Game(ariel::Player p1, ariel::Player p2)
+    Game::Game(Player& p1, Player& p2) : player1(p1), player2(p2) // references to the players, so the game will modify their arrtibutes
     {
-        this->player1 = p1;
-        this->player2 = p2;
+        // intialize decks.... game stats... 
     }
 
     void Game::playTurn()

@@ -16,11 +16,12 @@ namespace ariel
 {
     class Game
     {
-        Player player1;
-        Player player2;
+        Player& player1;
+        Player& player2;
+        // bool finish = false;
 
         public:
-        Game(Player p1, Player p2); // outline
+        Game(Player& p1, Player& p2); // references to selected players
         void playTurn(); // let us play a single battle
         void printLastTurn(); // let us prints the result of the last game that was played
         void playAll(); // let us run the whole game 
