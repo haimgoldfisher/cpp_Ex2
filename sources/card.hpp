@@ -2,10 +2,10 @@
 #define CARD_H
 
 typedef enum {CLUBS = 0, DIAMONDS = 1, HEARTS = 2, SPADES = 3} Suit;
-#define JACK 11
-#define QUEEN 12
-#define KING 13
-#define ACE 1
+constexpr int JACK = 11;
+constexpr int QUEEN = 12;
+constexpr int KING = 13;
+constexpr int ACE = 1;
 
 #include <iostream>
 #include <fstream>
