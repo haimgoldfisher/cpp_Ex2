@@ -21,7 +21,7 @@ namespace ariel
         // bool finish = false;
 
         public:
-        Game(Player& p1, Player& p2); // references to selected players
+        Game(Player& pl1, Player& pl2); // references to selected players
         void playTurn(); // let us play a single battle
         void printLastTurn(); // let us prints the result of the last game that was played
         void playAll(); // let us run the whole game 

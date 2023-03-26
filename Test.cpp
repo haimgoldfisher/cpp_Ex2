@@ -24,7 +24,7 @@ TEST_CASE("Card Constructor TEST:")
     // CHECK_THROWS(Card()); // cannot create a default card
     // CHECK_THROWS(Card(ACE-1, SPADES)); // illegal card value (1-13)
     // CHECK_THROWS(Card(KING+1, SPADES)); // illegal card value (1-13)
-    // Card queenHearts(QUEEN, HERATS); // Q♥ Constructor
+    // Card queenHearts(QUEEN, HEARTS); // Q♥ Constructor
     // Card aceDiamonds(ACE, DIAMONDS); // A♦ Constructor
     // CHECK(queenHearts > aceDiamond); // objects operator according to VALUE
     // CHECK(queenHearts.getValue() > aceDiamonds.getValue()); // the value of queen is bigger than the value of ace

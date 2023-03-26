@@ -9,7 +9,7 @@ using namespace std;
 
 namespace ariel
 {
-    Game::Game(Player& p1, Player& p2) : player1(p1), player2(p2) // references to the players, so the game will modify their arrtibutes
+    Game::Game(Player& pl1, Player& pl2) : player1(pl1), player2(pl2) // references to the players, so the game will modify their arrtibutes
     {
         // intialize decks.... game stats... 
     }
