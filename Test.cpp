@@ -33,7 +33,7 @@ TEST_CASE("Card Constructor TEST:")
     // CHECK(aceDiamonds.getSuit() != aceClubs.getSuit()); // ♦ != ♣ (SUITS)
 }
 
-// maybe I can build a class for DECK (and then apply: isEmpty(), Shuffle(), InsertToDeck(Card c), DrawCard() and more...)
+// maybe I can build a class for DECK (and then apply: isEmpty(), Shuffle(), InsertToDeck(Card c), PlayCard() and more...)
 // IDEAS: CHECK IF THE DECK WAS SHUFFLED? HOW?
 
 TEST_CASE("Game Constructor TEST:") 
