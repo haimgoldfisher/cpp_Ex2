@@ -10,7 +10,7 @@ namespace ariel
 {
     Player::Player()
     {
-        this->name = "Unknown Player";
+        this->name = "Unknown Player"; // im not sure if I want to allow this
     }
 
     Player::Player(string newName)

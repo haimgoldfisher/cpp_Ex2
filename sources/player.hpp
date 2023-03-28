@@ -12,7 +12,7 @@ namespace ariel
     class Player
     {
         string name;
-        int stackSize = 0; // the size of the deck of the player
+        int stackSize = 0; // the num of remained cards in the player's deck
         int cardsTaken = 0; // I guess its the number of the cards the player won during battles
 
         public:
