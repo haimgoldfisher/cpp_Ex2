@@ -26,8 +26,8 @@ namespace ariel
     {
         return this->cardsTaken;
     }
-    string Player::getName()
-    {
-        return this->name;
-    }
+    // string Player::getName()
+    // {
+    //     return this->name;
+    // }
 }

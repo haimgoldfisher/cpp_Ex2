@@ -20,7 +20,7 @@ namespace ariel
         Player(string newName); // according to the Demo file
         int stacksize(); // public 'get' method for stackSize
         int cardesTaken(); // public 'get' method for cardsTaken
-        string getName(); // public 'get' method for Player's name
+        // string getName(); // public 'get' method for Player's name
     };
 }
 
