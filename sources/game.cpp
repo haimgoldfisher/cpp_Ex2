@@ -11,12 +11,34 @@ namespace ariel
 {
     Game::Game(Player& pl1, Player& pl2) : player1(pl1), player2(pl2) // references to the players, so the game will modify their arrtibutes
     {
-        // intialize decks.... game stats... 
+        if (pl1.isInGame() || pl2.isInGame())
+        {
+            throw runtime_error("ONE OR TWO PLAYERS ARE STILL IN A GAME");
+        }
+        Player* pl1ptr = &pl1;
+        Player* pl2ptr = &pl2;
+        if (pl1ptr == pl2ptr) // both points to the same object
+        {
+            throw runtime_error("A PLAYER CANNOT PLAY AGAINST ITSELF");
+        }
+        Deck deck(true);
+        deck.shuffle();
+        while(!deck.isEmpty())
+        {
+            deck.share(this->deckP1);
+            deck.share(this->deckP2);
+        }
+        // playing -> true;
+
     }
 
     void Game::playTurn()
     {
-        return;
+        if (this->deckP1.isEmpty() || this->deckP2.isEmpty())
+        {
+            throw runtime_error("DECK OUT OF CARDS");
+        }
+        
     }
 
     void Game::printLastTurn()

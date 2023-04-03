@@ -30,4 +30,8 @@ namespace ariel
     {
         return this->name;
     }
+    bool Player::isInGame()
+    {
+        return this->playing;
+    }
 }

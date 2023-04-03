@@ -10,6 +10,7 @@ using namespace std;
 #include "game.hpp"
 #include "player.hpp"
 #include "card.hpp"
+#include "deck.hpp"
 using namespace ariel;
 
 namespace ariel
@@ -18,7 +19,9 @@ namespace ariel
     {
         Player& player1;
         Player& player2;
-        // bool finish = false;
+        Deck deckP1 = Deck(false); 
+        Deck deckP2 = Deck(false);
+        bool finish = false;
 
         public:
         Game(Player& pl1, Player& pl2); // references to selected players
