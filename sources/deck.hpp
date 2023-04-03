@@ -20,10 +20,11 @@ namespace ariel
         Deck(bool complete); // it creates an empty deck (complete or empty)
         ~Deck(); // destructor
         bool isEmpty(); // return true if the deck has no cards left
-        bool shuffle(); // its shuffle the deck
+        void shuffle(int amount); // its shuffle the deck with a disired times
         bool insertToDeck(Card c); // it insert a specific card to a deck
         Card top(); // it shows the top card of the deck
-        void PlayCard(); // it takes the the top card from the deck and play a turn with it
+        Card drawCard(); // it takes the top card of a deck and return it
+        void passCard(Deck other); // it takes the top card of a deck and move it to another deck
     };
 }
 

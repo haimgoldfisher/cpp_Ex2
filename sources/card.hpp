@@ -1,7 +1,7 @@
 #ifndef CARD_H
 #define CARD_H
 
-typedef enum {EMPTY = -1, CLUBS = 0, DIAMONDS = 1, HEARTS = 2, SPADES = 3} Suit; // symbols for cards
+typedef enum {EMPTY = 0, CLUBS = 1, DIAMONDS = 2, HEARTS = 3, SPADES = 4} Suit; // symbols for cards
 // special cards:
 constexpr int JACK = 11;
 constexpr int QUEEN = 12;

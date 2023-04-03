@@ -16,7 +16,7 @@ namespace ariel
 
     Card::Card(int number, Suit symbol)
     {
-        if(number > KING || number < 1)
+        if(number > KING || number < ACE)
         {
             throw runtime_error("ILLEGAL NUMBER");
         }

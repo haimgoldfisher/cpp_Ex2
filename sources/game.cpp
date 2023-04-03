@@ -21,12 +21,12 @@ namespace ariel
         {
             throw runtime_error("A PLAYER CANNOT PLAY AGAINST ITSELF");
         }
-        Deck deck(true);
-        deck.shuffle();
+        Deck deck(true); // full deck
+        deck.shuffle(10); // shuffle the deck 10 times
         while(!deck.isEmpty())
         {
-            deck.share(this->deckP1);
-            deck.share(this->deckP2);
+            deck.passCard(this->deckP1);
+            deck.passCard(this->deckP2);
         }
         // playing -> true;
 
