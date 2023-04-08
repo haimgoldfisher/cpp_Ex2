@@ -19,9 +19,11 @@ namespace ariel
     {
         Player& player1;
         Player& player2;
-        Deck deckP1 = Deck(false); 
-        Deck deckP2 = Deck(false);
+        string winner;
+        Deck deckP1 = new Deck(false); // empty deck with 26 capacity 
+        Deck deckP2 = new Deck(false); // empty deck with 26 capacity 
         bool finish = false;
+        vector<string> gameLog;
 
         public:
         Game(Player& pl1, Player& pl2); // references to selected players
@@ -32,6 +34,8 @@ namespace ariel
         void printLog(); // let us print the chain of moves in the game (during the game or only after the game was played?)
         void printStats(); // let us print win rate, cards won, other stats...
                            // Also print the draw rate and amount of draws that happand. (draw within a draw counts as 2 draws.)
+        void closeGame(); // it calls the winner and free the players from the game
+        void battle(Deck& prizeDeck, string battleWinner, string battleLog); // recursive function that apply a single battle
     };
 }
 

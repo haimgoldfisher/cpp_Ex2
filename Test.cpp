@@ -22,8 +22,8 @@ TEST_CASE("Player Constructor TEST:")
 TEST_CASE("Card Constructor TEST:") 
 { 
     // CHECK_THROWS(Card()); // cannot create a default card
-    // CHECK_THROWS(Card(ACE-1, SPADES)); // illegal card value (1-13)
-    // CHECK_THROWS(Card(KING+1, SPADES)); // illegal card value (1-13)
+    // CHECK_THROWS(Card(ACE+1, SPADES)); // illegal card value (2-14)
+    // CHECK_THROWS(Card(2-1, SPADES)); // illegal card value (2-14)
     // Card queenHearts(QUEEN, HEARTS); // Q♥ Constructor
     // Card aceDiamonds(ACE, DIAMONDS); // A♦ Constructor
     // CHECK(queenHearts > aceDiamond); // objects operator according to VALUE

@@ -6,7 +6,7 @@ typedef enum {EMPTY = 0, CLUBS = 1, DIAMONDS = 2, HEARTS = 3, SPADES = 4} Suit; 
 constexpr int JACK = 11;
 constexpr int QUEEN = 12;
 constexpr int KING = 13;
-constexpr int ACE = 1;
+constexpr int ACE = 14;
 
 #include <iostream>
 #include <fstream>
@@ -26,6 +26,9 @@ namespace ariel
         Card(int number, Suit symbol); // it creates a card with number and suit
         int getValue(); // it returns the value of the card
         Suit getSuit(); // it returns the suit (symbol) of the card (♠/♥/♣/♦)
+        string getValAsStr(); // it returns the value of the card as a string
+        string getSuitAsStr(); // it returns the suit of the card as a string
+        string to_string(); // the wanted format for a print of a card
     };
 }
 
