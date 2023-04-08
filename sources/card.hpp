@@ -28,7 +28,6 @@ namespace ariel
         Suit getSuit(); // it returns the suit (symbol) of the card (♠/♥/♣/♦)
         string getValAsStr(); // it returns the value of the card as a string
         string getSuitAsStr(); // it returns the suit of the card as a string
-        string to_string(); // the wanted format for a print of a card
     };
 }
 

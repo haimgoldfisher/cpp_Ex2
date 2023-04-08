@@ -17,16 +17,15 @@ namespace ariel
     class Deck
     {
         int cardsNum; // the number of cards in the deck
-        vector<Card>* stack = new vector<Card>;
+        std::vector<Card>* stack;
 
         public:
         Deck(bool complete); // it creates a disired stack of cards (52 full \ 26 empty)
-        ~Deck(); // destructor
         bool isEmpty(); // return true if the deck has no cards left
         Deck& shuffle(int amount); // its shuffle the deck with a disired times
-        Deck& insertToDeck(Card& c); // it insert a specific card to a deck
-        Card& top(); // it shows the top card of the deck
-        Card& drawCard(); // it takes the top card of a deck and return it
+        Deck& insertToDeck(Card& newCard); // it insert a specific card to a deck
+        // Card& top(); // it shows the top card of the deck
+        Card drawCard(); // it takes the top card of a deck and return it
         Deck& passCard(Deck& other); // it takes the top card of a deck and move it to another deck
         int getSize(); // cardsNum getter
     };

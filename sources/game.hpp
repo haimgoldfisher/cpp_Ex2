@@ -20,8 +20,8 @@ namespace ariel
         Player& player1;
         Player& player2;
         string winner;
-        Deck deckP1 = new Deck(false); // empty deck with 26 capacity 
-        Deck deckP2 = new Deck(false); // empty deck with 26 capacity 
+        Deck deckP1 = Deck(false); // empty deck with 26 capacity 
+        Deck deckP2 = Deck(false); // empty deck with 26 capacity 
         bool finish = false;
         vector<string> gameLog;
 

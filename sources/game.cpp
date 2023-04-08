@@ -15,7 +15,7 @@ namespace ariel
         {
             throw runtime_error("ONE OR TWO PLAYERS ARE STILL IN A GAME");
         }
-        Deck deck = new Deck(true); // full deck
+        Deck deck(true); // full deck
         deck.shuffle(10); // shuffle the deck 10 times
         while(!deck.isEmpty())
         {
@@ -52,7 +52,7 @@ namespace ariel
         }
         string battleWinner, battleLog;
         battleLog = "";
-        Deck treasureDeck = new Deck(false); // the winner will get this deck's cards
+        Deck treasureDeck(false); // the winner will get this deck's cards
         battle(treasureDeck, battleLog, battleWinner);
         if (this->player1.stacksize() == 0 || this->player1.stacksize() == 0)
         {
@@ -72,8 +72,8 @@ namespace ariel
             }
             return;
         }
-        Card& p1card = this->deckP1.drawCard();
-        Card& p2card = this->deckP2.drawCard();
+        Card p1card = this->deckP1.drawCard();
+        Card p2card = this->deckP2.drawCard();
         this->player1.dropCard();
         this->player2.dropCard();
         prizeDeck.insertToDeck(p1card).insertToDeck(p2card);
@@ -126,8 +126,8 @@ namespace ariel
                 player2.setTaken(prizeDeck.getSize()/2);
                 return;
             }
-            Card& p1card2 = this->deckP1.drawCard(); // place one hidden card
-            Card& p2card2 = this->deckP2.drawCard(); // place one hidden card
+            Card p1card2 = this->deckP1.drawCard(); // place one hidden card
+            Card p2card2 = this->deckP2.drawCard(); // place one hidden card
             this->player1.dropCard();
             this->player2.dropCard();
             prizeDeck.insertToDeck(p1card2).insertToDeck(p2card2);
@@ -170,7 +170,7 @@ namespace ariel
             throw runtime_error("THE FIRST TURN DID NOT PLAY");
         }
         for (int i = 0; i < this->gameLog.size(); i++)
-        cout << this->gameLog[i] << endl;
+        cout << this->gameLog[static_cast<unsigned long>(i)] << endl;
     }
 
     void Game::printStats()
