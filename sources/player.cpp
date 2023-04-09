@@ -30,6 +30,10 @@ namespace ariel
     {
         this->cardsTaken += add;
     }
+    void Player::setStack(int num)
+    {
+        this->stackSize = num;
+    }
     string Player::getName()
     {
         return this->name;
@@ -44,8 +48,6 @@ namespace ariel
     }
     void Player::endGame()
     {
-        this->stackSize = 0;
-        this->cardsTaken = 0;
         this->playing = false;
     }
     bool Player::isInGame()

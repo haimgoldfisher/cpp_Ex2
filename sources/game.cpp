@@ -12,12 +12,13 @@ namespace ariel
 {
     Game::Game(Player& pl1, Player& pl2) : player1(pl1), player2(pl2) // references to the players, so the game will modify their arrtibutes
     {
-        
+        player1.setStack(26);
+        player2.setStack(26);
     }
 
     void Game::closeGame()
     {
-        if (player1.cardesTaken() > player2.cardesTaken())
+        if (this->player1.cardesTaken() > this->player2.cardesTaken())
         {
             this->winner = player1.getName();
         }
@@ -36,13 +37,17 @@ namespace ariel
 
     void Game::playTurn()
     {
-        if (player1.cardesTaken() == 0 && player2.cardesTaken() == 0) // its first turn
+        if (this->player1.stacksize() == 0 || this->player2.stacksize() == 0)
         {
-            if (&player1 == &player2) // same player case
+            throw runtime_error("CANNOT PLAY A TURN, RUN OUT OF CARDS");
+        }
+        if (this->player1.cardesTaken() == 0 && this->player2.cardesTaken() == 0) // its first turn
+        {
+            if (&this->player1 == &this->player2) // same player case
             {
                 throw runtime_error("A PLAYER CANNOT PLAY AGAINST ITSELF");
             }
-            if (player1.isInGame() || player2.isInGame())
+            if (this->player1.isInGame() || this->player2.isInGame())
             {
                 throw runtime_error("ONE OR MORE PLAYERS ALREADY PLAYING");
             }
@@ -62,22 +67,15 @@ namespace ariel
             {
                 Card toInsert1 = deck[static_cast<unsigned long>(deck.size()-1)];
                 this->deckP1.push_back(toInsert1);
-                player1.addCard();
                 deck.pop_back();
                 Card toInsert2 = deck[static_cast<unsigned long>(deck.size()-1)];
                 this->deckP2.push_back(toInsert2);
-                player2.addCard(); 
                 deck.pop_back();
             }
-            player1.startGame();
-            player2.startGame();
+            this->player1.startGame();
+            this->player2.startGame();
         }
-
         battle(0, "", "");
-        if (this->player1.stacksize() == 0 || this->player1.stacksize() == 0)
-        {
-            this->closeGame();
-        }
     }
 
     void Game::battle(int prize, string battleWinner, string battleLog)
@@ -108,14 +106,14 @@ namespace ariel
             {
                 if (p1card.getValue() == ACE && p2card.getValue() == 2)
                 {
-                    player2.setTaken(prize); // only 2 wins ACE
+                    this->player2.setTaken(prize); // only 2 wins ACE
                     battleWinner = player2.getName();
                     this->player2.addWin();
                     this->player1.addLose();
                 }
                 else
                 {
-                    player1.setTaken(prize);
+                    this->player1.setTaken(prize);
                     battleWinner = player1.getName();
                     this->player1.addWin();
                     this->player2.addLose();
@@ -127,14 +125,14 @@ namespace ariel
             {
                 if (p2card.getValue() == ACE && p1card.getValue() == 2)
                 {
-                    player1.setTaken(prize); // only 2 wins ACE
+                    this->player1.setTaken(prize); // only 2 wins ACE
                     battleWinner = player1.getName();
                     this->player1.addWin();
                     this->player2.addLose();
                 }
                 else
                 {
-                    player2.setTaken(prize);
+                    this->player2.setTaken(prize);
                     battleWinner = player2.getName();
                     this->player2.addWin();
                     this->player1.addLose();
@@ -150,8 +148,8 @@ namespace ariel
                 if (this->player1.stacksize() == 0 || this->player1.stacksize() == 0) // if cant place one more hidden card
                 {
                     battleLog += "Run out of cards.";
-                    player1.setTaken(prize/2);
-                    player2.setTaken(prize/2);
+                    this->player1.setTaken(prize/2);
+                    this->player2.setTaken(prize/2);
                     break;
                 }
                 Card p1card2 = this->deckP1[static_cast<unsigned long>(this->deckP1.size()-1)]; // place one hidden card
@@ -179,7 +177,7 @@ namespace ariel
 
     void Game::playAll()
     {
-        while(this->player1.isInGame())
+        while(this->player1.stacksize() > 0 && this->player2.stacksize() > 0)
         {
             playTurn();
         }
@@ -189,7 +187,8 @@ namespace ariel
     {
         if(!this->finish)
         {
-            throw runtime_error("GAME IS STILL IN PROGRESS");
+            cout << "GAME IS STILL IN PROGRESS" << endl;
+            return;
         }
         cout << this->winner << endl;
     }
