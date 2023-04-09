@@ -36,10 +36,10 @@ namespace ariel
     }
     void Player::startGame()
     {
-        // if (isInGame())
-        // {
-        //     throw runtime_error("ALREADY PLAYING");
-        // }
+        if (isInGame())
+        {
+            throw runtime_error("ALREADY PLAYING");
+        }
         this->playing = true;
     }
     void Player::endGame()
@@ -81,6 +81,15 @@ namespace ariel
     int Player::getTies()
     {
         return this->draws;
+    }
+
+    void Player::addCard()
+    {
+        if (this->stacksize() > 25)
+        {
+            throw runtime_error("CANNOT ADD A CARD, THE STACK IS FULL");
+        }
+        this->stackSize++;
     }
 
     void Player::dropCard()

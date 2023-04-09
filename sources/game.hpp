@@ -5,12 +5,12 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+#include <vector>
 using namespace std;
 
 #include "game.hpp"
 #include "player.hpp"
 #include "card.hpp"
-#include "deck.hpp"
 using namespace ariel;
 
 namespace ariel
@@ -20,8 +20,8 @@ namespace ariel
         Player& player1;
         Player& player2;
         string winner;
-        Deck deckP1 = Deck(false); // empty deck with 26 capacity 
-        Deck deckP2 = Deck(false); // empty deck with 26 capacity 
+        vector<Card> deckP1; // empty deck with 26 capacity 
+        vector<Card> deckP2; // empty deck with 26 capacity 
         bool finish = false;
         vector<string> gameLog;
 
@@ -35,7 +35,7 @@ namespace ariel
         void printStats(); // let us print win rate, cards won, other stats...
                            // Also print the draw rate and amount of draws that happand. (draw within a draw counts as 2 draws.)
         void closeGame(); // it calls the winner and free the players from the game
-        void battle(Deck& prizeDeck, string battleWinner, string battleLog); // recursive function that apply a single battle
+        void battle(int prize, string battleWinner, string battleLog); // recursive function that apply a single battle
     };
 }
 

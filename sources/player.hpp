@@ -35,6 +35,7 @@ namespace ariel
         int getWins();
         int getLoses();
         int getTies();
+        void addCard(); // it increases stackSize by one
         void dropCard(); // it decreases stackSize by one
     };
 }
