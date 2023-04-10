@@ -6,7 +6,6 @@
 using namespace std;
 
 #include "game.hpp"
-#include "player.hpp"
 
 namespace ariel
 {
@@ -26,7 +25,7 @@ namespace ariel
         {
             this->winner = player2.getName();
         }
-        else 
+        else // when they both won 26 cards
         {
             this->winner = "Draw";
         }
@@ -37,71 +36,59 @@ namespace ariel
 
     void Game::playTurn()
     {
-        if (this->player1.stacksize() == 0 || this->player2.stacksize() == 0)
+        if (this->player1.stacksize() == 0 || this->player2.stacksize() == 0) // when try to play a turn after the game was closed
         {
             throw runtime_error("CANNOT PLAY A TURN, RUN OUT OF CARDS");
         }
-        if (this->player1.cardesTaken() == 0 && this->player2.cardesTaken() == 0) // its first turn
+        if (this->player1.cardesTaken() == 0 && this->player2.cardesTaken() == 0) // its the first turn
         {
             if (&this->player1 == &this->player2) // same player case
             {
                 throw runtime_error("A PLAYER CANNOT PLAY AGAINST ITSELF");
             }
-            if (this->player1.isInGame() || this->player2.isInGame())
+            if (this->player1.isInGame() || this->player2.isInGame()) // when a player is already in another game
             {
                 throw runtime_error("ONE OR MORE PLAYERS ALREADY PLAYING");
             }
-            vector<Card> deck;
-            for (int i = 1; i <= 4; i++) // {EMPTY = 0, CLUBS = 1, DIAMONDS = 2, HEARTS = 3, SPADES = 4}
+            Deck deck(true); // creates a complete deck with 52 cards
+            deck.shuffle(5); // shuffle the deck 5 times
+            while(!deck.isEmpty()) // deal a card to each player until they have 26 cards
             {
-                Suit suit = (Suit)i;
-                for (int val = 2; val <= ACE; val++) // 2 to 14
-                {
-                    Card newCard(val, suit);
-                    deck.push_back(newCard);
-                }
+                deck.passCard(this->deckP1);
+                deck.passCard(this->deckP2);
             }
-            srand(time(0));
-            random_shuffle(deck.begin(), deck.end());
-            while(!deck.empty())
+            if (this->deckP1.getSize() != this->deckP1.getSize()) // self check that each player got the same amount of cards
             {
-                Card toInsert1 = deck[static_cast<unsigned long>(deck.size()-1)];
-                this->deckP1.push_back(toInsert1);
-                deck.pop_back();
-                Card toInsert2 = deck[static_cast<unsigned long>(deck.size()-1)];
-                this->deckP2.push_back(toInsert2);
-                deck.pop_back();
+                throw runtime_error("UNEQUAL DISTRIBUTION");
             }
-            this->player1.startGame();
+            this->player1.startGame(); 
             this->player2.startGame();
         }
-        battle(0, "", "");
+        battle(0, "", ""); // a method for a turn's battle
     }
 
     void Game::battle(int prize, string battleWinner, string battleLog)
     {
-        while(true)
+        while(true) // since a draw leads to another battle
         {
-            if (this->player1.stacksize() == 0 || this->player1.stacksize() == 0)
+            if (this->player1.stacksize() == 0 || this->player1.stacksize() == 0) // someone run out of cards
             {
                 battleLog += "Run out of cards.";
-                if(prize != 0)
+                if(prize != 0) // we need to share the cards between both players
                 {
                     player1.setTaken(prize/2);
                     player2.setTaken(prize/2);
                 }
                 break;
             }
-            Card p1card = this->deckP1[static_cast<unsigned long>(this->deckP1.size()-1)];
-            this->deckP1.pop_back();
-            Card p2card = this->deckP2[static_cast<unsigned long>(this->deckP2.size()-1)];
-            this->deckP2.pop_back();
+            Card p1card = this->deckP1.drawCard();
+            Card p2card = this->deckP2.drawCard();
             this->player1.dropCard();
             this->player2.dropCard();
             prize += 2;
-            string p1 = p1card.getValAsStr() + " of " + p1card.getSuitAsStr();
-            string p2 = p2card.getValAsStr() + " of " + p2card.getSuitAsStr();
-            battleLog += this->player1.getName()+" played "+p1+" "+this->player2.getName()+ " played "+p2+". ";
+            string actionP1 = p1card.getValAsStr() + " of " + p1card.getSuitAsStr();
+            string actionP2 = p2card.getValAsStr() + " of " + p2card.getSuitAsStr();
+            battleLog += this->player1.getName() + " played "+ actionP1 +" "+ this->player2.getName()+  " played "+ actionP2 +". ";
             if (p1card.getValue() > p2card.getValue())
             {
                 if (p1card.getValue() == ACE && p2card.getValue() == 2)
@@ -118,7 +105,7 @@ namespace ariel
                     this->player1.addWin();
                     this->player2.addLose();
                 }
-                battleLog += battleWinner+" wins."; // name of winner
+                battleLog += battleWinner + " wins."; // name of winner
                 break;
             }
             else if (p1card.getValue() < p2card.getValue())
@@ -137,7 +124,7 @@ namespace ariel
                     this->player2.addWin();
                     this->player1.addLose();
                 }
-                battleLog += battleWinner+" wins."; // name of winner
+                battleLog += battleWinner + " wins."; // name of winner
                 break;
             }
             else // TIE CASE
@@ -145,29 +132,27 @@ namespace ariel
                 battleLog += "Draw. ";
                 this->player1.addTie();
                 this->player2.addTie();
-                if (this->player1.stacksize() == 0 || this->player1.stacksize() == 0) // if cant place one more hidden card
+                if (this->player1.stacksize() == 0 || this->player1.stacksize() == 0) // ran out of cards before nedd to place one hidden card
                 {
-                    battleLog += "Run out of cards.";
+                    battleLog += "Run out of cards."; // share the prize:
                     this->player1.setTaken(prize/2);
                     this->player2.setTaken(prize/2);
                     break;
                 }
-                Card p1card2 = this->deckP1[static_cast<unsigned long>(this->deckP1.size()-1)]; // place one hidden card
-                this->deckP1.pop_back();
-                Card p2card2 = this->deckP2[static_cast<unsigned long>(this->deckP2.size()-1)]; // place one hidden card
-                this->deckP2.pop_back();
+                Card p1card2 = this->deckP1.drawCard(); // hidden card
+                Card p2card2 = this->deckP2.drawCard(); // hidden card
                 this->player1.dropCard();
                 this->player2.dropCard();
                 prize += 2;
             }
         }
-        this->gameLog.push_back(battleLog);
+        this->gameLog.push_back(battleLog); // add this battle log the the list of turns log
         // cout << battleLog << endl;
     }
 
     void Game::printLastTurn()
     {
-        if(this->player1.cardesTaken() == 0 && this->player2.cardesTaken() == 0)
+        if(this->player1.cardesTaken() == 0 && this->player2.cardesTaken() == 0) // nobody won == didnt start the game
         {
             throw runtime_error("THE FIRST TURN DID NOT PLAY");
         }
@@ -177,6 +162,10 @@ namespace ariel
 
     void Game::playAll()
     {
+        if (this->player1.stacksize() == 0 || this->player2.stacksize() == 0) // when try to play all turns after the game was closed
+        {
+            throw runtime_error("CANNOT PLAY A TURN, RUN OUT OF CARDS");
+        }
         while(this->player1.stacksize() > 0 && this->player2.stacksize() > 0)
         {
             playTurn();
