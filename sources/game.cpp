@@ -8,7 +8,7 @@ using namespace std;
 
 namespace ariel
 {
-    Game::Game(Player& pl1, Player& pl2) : player1(pl1), player2(pl2) // references to the players, so the game will modify their arrtibutes
+    Game::Game(Player& pl1, Player& pl2) : player1(pl1), player2(pl2) // references to the players, so the game will modify their attributes
     {
         player1.setStack(26);
         player2.setStack(26);
@@ -67,6 +67,10 @@ namespace ariel
         // update that both players made a turn:
         this->player1.AddturnsPlayed();
         this->player2.AddturnsPlayed();
+        if (this->player1.cardesTaken() + this->player2.cardesTaken() == 52) // won all possible cards
+        {
+            closeGame();
+        }
     }
 
     void Game::battle(int prize, string battleWinner, string battleLog)
@@ -164,11 +168,11 @@ namespace ariel
 
     void Game::playAll()
     {
-        // if (this->player1.stacksize() == 0 || this->player2.stacksize() == 0) // when try to play all turns after the game was closed
-        // {
-        //     throw runtime_error("CANNOT PLAY A TURN, RUN OUT OF CARDS");
-        // }
-        while(this->player1.stacksize() > 0 && this->player2.stacksize() > 0)
+        if (this->player1.cardesTaken() + this->player2.cardesTaken() == 52) // when try to play all turns after the game was closed
+        {
+            throw runtime_error("CANNOT PLAY A TURN, RUN OUT OF CARDS");
+        }
+        while(this->player1.cardesTaken() + this->player2.cardesTaken() != 52)
         {
             playTurn();
         }
