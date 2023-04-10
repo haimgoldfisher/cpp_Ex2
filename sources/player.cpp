@@ -29,6 +29,7 @@ namespace ariel
     void Player::setTaken(int add)
     {
         this->cardsTaken += add;
+        this->addCardsWon(add);
     }
     void Player::setStack(int num)
     {
@@ -101,5 +102,30 @@ namespace ariel
             throw runtime_error("CANNOT DROP A CARD, THE STACK IS EMPTY");
         }
         this->stackSize--;
+        this->AdddrawsMade(); // update that the player made a draw of a card
+    }
+    int Player::getCardsWon()
+    {
+        return this->cardsWon;
+    }
+    void Player::addCardsWon(int cardsNum)
+    {
+        this->cardsWon += cardsNum;
+    }
+    void Player::AdddrawsMade()
+    {
+        this->drawsMade++;
+    }
+    void Player::AddturnsPlayed()
+    {
+        this->turnsPlayed++;
+    }
+    int Player::getDrawsMade()
+    {
+        return this->drawsMade;
+    }
+    int Player::getTurnsPlayed()
+    {
+        return this->turnsPlayed;
     }
 }

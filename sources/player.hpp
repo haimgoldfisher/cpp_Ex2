@@ -18,6 +18,9 @@ namespace ariel
         int wins = 0;
         int loses = 0;
         int draws = 0;
+        int cardsWon = 0;
+        int drawsMade = 0;
+        int turnsPlayed = 0;
 
         public:
         Player(); // default constructer
@@ -33,9 +36,15 @@ namespace ariel
         void addWin(); // it adds a win to wins counter
         void addLose(); // it adds a lose to loses counter
         void addTie(); // it adds a tie to draws counter
+        void addCardsWon(int cardsNum);
+        void AdddrawsMade();
+        void AddturnsPlayed();
         int getWins();
         int getLoses();
         int getTies();
+        int getCardsWon();
+        int getDrawsMade(); 
+        int getTurnsPlayed();
         void addCard(); // it increases stackSize by one
         void dropCard(); // it decreases stackSize by one
     };

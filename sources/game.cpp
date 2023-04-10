@@ -64,6 +64,9 @@ namespace ariel
             this->player2.startGame();
         }
         battle(0, "", ""); // a method for a turn's battle
+        // update that both players made a turn:
+        this->player1.AddturnsPlayed();
+        this->player2.AddturnsPlayed();
     }
 
     void Game::battle(int prize, string battleWinner, string battleLog)
@@ -161,10 +164,10 @@ namespace ariel
 
     void Game::playAll()
     {
-        if (this->player1.stacksize() == 0 || this->player2.stacksize() == 0) // when try to play all turns after the game was closed
-        {
-            throw runtime_error("CANNOT PLAY A TURN, RUN OUT OF CARDS");
-        }
+        // if (this->player1.stacksize() == 0 || this->player2.stacksize() == 0) // when try to play all turns after the game was closed
+        // {
+        //     throw runtime_error("CANNOT PLAY A TURN, RUN OUT OF CARDS");
+        // }
         while(this->player1.stacksize() > 0 && this->player2.stacksize() > 0)
         {
             playTurn();
@@ -194,9 +197,13 @@ namespace ariel
     void Game::printStats()
     {
         string pl1 = this->player1.getName() + " Stats: Total wins: "+to_string(this->player1.getWins())+
-        ", Total Loses: "+to_string(this->player1.getLoses())+", Total Ties:"+to_string(this->player1.getTies())+".";
+        ", Total Loses: "+to_string(this->player1.getLoses())+", Total Ties:"+to_string(this->player1.getTies())+
+        ", Turns Played: " + to_string(this->player1.getTurnsPlayed())+", Cards Drawed: "+to_string(this->player1.getDrawsMade())+
+        ", Cards Won: " + to_string(this->player1.getCardsWon()) + "."; 
         string pl2 = this->player2.getName() + " Stats: Total wins: "+to_string(this->player2.getWins())+
-        ", Total Loses: "+to_string(this->player2.getLoses())+", Total Ties:"+to_string(this->player2.getTies())+".";
+        ", Total Loses: "+to_string(this->player2.getLoses())+", Total Ties:"+to_string(this->player2.getTies())+
+        ", Turns Played: " + to_string(this->player2.getTurnsPlayed())+", Cards Drawed: "+to_string(this->player2.getDrawsMade())+
+        ", Cards Won: " + to_string(this->player2.getCardsWon()) + "."; 
         cout << pl1 << endl;
         cout << pl2 << endl;
     }
