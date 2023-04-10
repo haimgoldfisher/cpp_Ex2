@@ -33,24 +33,24 @@ namespace ariel
     
     void Deck::shuffle(int amount)
     {
-        srand(time(0));
+        srand(time(0)); // random seed
         for (int i = 0; i < amount; i++)
         {
-            random_shuffle(this->stack.begin(), this->stack.end());
+            random_shuffle(this->stack.begin(), this->stack.end()); // build-in shuffle function (<algorithm>)
         }
     }
 
     Card Deck::drawCard()
     {
-        Card drawed = this->stack[static_cast<unsigned long>(this->getSize()-1)];
-        this->stack.pop_back();
-        return drawed;
+        Card top = this->stack[static_cast<unsigned long>(this->getSize()-1)]; // make a copy of the card
+        this->stack.pop_back(); // pop the original card from the deck
+        return top;
     }
     
     void Deck::passCard(Deck& other)
     {
-        Card toInsert = this->drawCard();
-        other.stack.push_back(toInsert);
+        Card toInsert = this->drawCard(); // draw a card from the deck
+        other.stack.push_back(toInsert); // put it in the other deck
     }
 
     int Deck::getSize()

@@ -2,7 +2,6 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
-#include <algorithm>
 using namespace std;
 
 #include "game.hpp"
