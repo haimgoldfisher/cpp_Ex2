@@ -200,13 +200,15 @@ namespace ariel
 
     void Game::printStats()
     {
-        string pl1 = this->player1.getName() + " Stats: Total wins: "+to_string(this->player1.getWins())+
-        ", Total Loses: "+to_string(this->player1.getLoses())+", Total Ties:"+to_string(this->player1.getTies())+
-        ", Turns Played: " + to_string(this->player1.getTurnsPlayed())+", Cards Drawed: "+to_string(this->player1.getDrawsMade())+
+        string pl1 = this->player1.getName() + " Stats: Total Wins: "+to_string(this->player1.getWins())+
+        ", Total Loses: "+to_string(this->player1.getLoses())+", Total Ties: "+to_string(this->player1.getTies())+
+        this->player1.rates()+
+        "Turns Played: " + to_string(this->player1.getTurnsPlayed())+", Cards Drawed: "+to_string(this->player1.getDrawsMade())+
         ", Cards Won: " + to_string(this->player1.getCardsWon()) + "."; 
-        string pl2 = this->player2.getName() + " Stats: Total wins: "+to_string(this->player2.getWins())+
-        ", Total Loses: "+to_string(this->player2.getLoses())+", Total Ties:"+to_string(this->player2.getTies())+
-        ", Turns Played: " + to_string(this->player2.getTurnsPlayed())+", Cards Drawed: "+to_string(this->player2.getDrawsMade())+
+        string pl2 = this->player2.getName() + " Stats: Total Wins: "+to_string(this->player2.getWins())+
+        ", Total Loses: "+to_string(this->player2.getLoses())+", Total Ties: "+to_string(this->player2.getTies())+
+        this->player2.rates()+
+        "Turns Played: " + to_string(this->player2.getTurnsPlayed())+", Cards Drawed: "+to_string(this->player2.getDrawsMade())+
         ", Cards Won: " + to_string(this->player2.getCardsWon()) + "."; 
         cout << pl1 << endl;
         cout << pl2 << endl;

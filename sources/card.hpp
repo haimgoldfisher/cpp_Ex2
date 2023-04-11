@@ -23,7 +23,7 @@ namespace ariel
 
         public:
         Card(); // empty card
-        Card(int number, Suit symbol); // it creates a card with number and suit
+        Card(int, Suit); // it creates a card with number and suit
         int getValue(); // it returns the value of the card
         Suit getSuit(); // it returns the suit (symbol) of the card (♠/♥/♣/♦)
         string getValAsStr(); // it returns the value of the card as a string

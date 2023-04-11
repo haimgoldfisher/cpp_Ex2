@@ -26,7 +26,7 @@ namespace ariel
         vector<string> gameLog; // it saves the string of each turn
 
         public:
-        Game(Player& pl1, Player& pl2); // references to selected players
+        Game(Player&, Player&); // references to selected players
         void playTurn(); // let us play a single battle
         void printLastTurn(); // let us prints the result of the last game that was played
         void playAll(); // let us run the whole game 
@@ -35,7 +35,7 @@ namespace ariel
         void printStats(); // let us print win rate, cards won, other stats...
                            // Also print the draw rate and amount of draws that happand. (draw within a draw counts as 2 draws.)
         void closeGame(); // it calls the winner and free the players from the game
-        void battle(int prize, string battleWinner, string battleLog); // the cards that the winner win, name of the winner & battle's chain of events
+        void battle(int, string, string); // the cards that the winner win, name of the winner & battle's chain of events
     };
 }
 

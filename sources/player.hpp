@@ -24,11 +24,11 @@ namespace ariel
 
         public:
         Player(); // default constructer
-        Player(string newName); // according to the Demo file
+        Player(string); // according to the Demo file
         int stacksize(); // public 'get' method for stackSize
         int cardesTaken(); // public 'get' method for cardsTaken
-        void setTaken(int add); // public 'set' method for cardsTaken
-        void setStack(int num); // public 'set' method for stackSize
+        void setTaken(int); // public 'set' method for cardsTaken
+        void setStack(int); // public 'set' method for stackSize
         string getName(); // public 'get' method for Player's name
         void startGame(); // playing setter
         void endGame(); // playing setter
@@ -36,7 +36,7 @@ namespace ariel
         void addWin(); // it adds a win to wins counter
         void addLose(); // it adds a lose to loses counter
         void addTie(); // it adds a tie to draws counter
-        void addCardsWon(int cardsNum);
+        void addCardsWon(int);
         void AdddrawsMade();
         void AddturnsPlayed();
         int getWins();
@@ -45,6 +45,7 @@ namespace ariel
         int getCardsWon();
         int getDrawsMade(); 
         int getTurnsPlayed();
+        string rates(); // return win,lose,draw rates as a string
         void addCard(); // it increases stackSize by one
         void dropCard(); // it decreases stackSize by one
     };

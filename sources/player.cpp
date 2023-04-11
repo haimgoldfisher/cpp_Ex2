@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+#include <cmath>
 using namespace std;
 
 #include "player.hpp"
@@ -46,6 +47,12 @@ namespace ariel
             throw runtime_error("ALREADY PLAYING");
         }
         this->playing = true;
+        this->wins = 0;
+        this->loses = 0;
+        this-> draws = 0;
+        this->cardsWon = 0;
+        this->turnsPlayed = 0;
+        this->drawsMade = 0;
     }
     void Player::endGame()
     {
@@ -127,5 +134,21 @@ namespace ariel
     int Player::getTurnsPlayed()
     {
         return this->turnsPlayed;
+    }
+    float myRound(double num)
+    {
+        return round(num * 100.0) / 100.0;
+    }
+
+    string Player::rates()
+    {
+        double sum = this->wins + this->loses +this->draws;
+        string winRate = to_string((this->wins/sum)*100);
+        winRate = winRate.substr(0,5) + "%";
+        string loseRate = to_string((this->loses/sum)*100)+"%"; 
+        loseRate = loseRate.substr(0,5) + "%";
+        string tieRate = to_string((this->draws/sum)*100)+"%";
+        tieRate = tieRate.substr(0,5) + "%";
+        return ". Win Rate: "+winRate+", Lose Rate: "+loseRate+", Draw Rate: "+tieRate+", ";
     }
 }

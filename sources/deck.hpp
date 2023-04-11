@@ -17,11 +17,11 @@ namespace ariel
         vector<Card> stack; // the deck
 
         public:
-        Deck(bool complete); // it creates a disired stack of cards (full \ empty)
+        Deck(bool); // it creates a disired stack of cards (full \ empty)
         bool isEmpty(); // it returns true if the deck has no cards left
-        void shuffle(int amount); // its shuffle the deck with a disired number of iters
+        void shuffle(int); // its shuffle the deck with a disired number of iters
         Card drawCard(); // it draws the top card of a deck and returns it
-        void passCard(Deck& other); // it takes the top card of a deck and move it to another deck
+        void passCard(Deck&); // it takes the top card of a deck and move it to another deck
         int getSize(); // public 'get' method for the size of the deck
     };
 }
