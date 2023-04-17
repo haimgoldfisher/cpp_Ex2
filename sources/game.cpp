@@ -10,8 +10,13 @@ namespace ariel
 {
     Game::Game(Player& pl1, Player& pl2) : player1(pl1), player2(pl2) // references to the players, so the game will modify their attributes
     {
-        player1.setStack(26);
-        player2.setStack(26);
+        if (!player1.isInGame() && !player2.isInGame()) // to make sure we dont destroy an exist game:
+        {
+            player1.setStack(26);
+            player2.setStack(26);
+            player1.initTaken();
+            player2.initTaken();
+        }
     }
 
     void Game::closeGame()
@@ -43,11 +48,11 @@ namespace ariel
         {
             if (&this->player1 == &this->player2) // same player case
             {
-                throw runtime_error("A PLAYER CANNOT PLAY AGAINST ITSELF");
+                throw runtime_error("A PLAYER CANNOT PLAY AGAINST HIMSELF");
             }
             if (this->player1.isInGame() || this->player2.isInGame()) // when a player is already in another game
             {
-                throw runtime_error("ONE OR MORE PLAYERS ALREADY PLAYING");
+                throw runtime_error("ONE OR MORE PLAYERS ARE ALREADY PLAYING");
             }
             Deck deck(true); // creates a complete deck with 52 cards
             deck.shuffle(5); // shuffle the deck 5 times

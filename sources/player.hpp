@@ -28,6 +28,7 @@ namespace ariel
         int stacksize(); // public 'get' method for stackSize
         int cardesTaken(); // public 'get' method for cardsTaken
         void setTaken(int); // public 'set' method for cardsTaken
+        void initTaken(); // init to 0 
         void setStack(int); // public 'set' method for stackSize
         string getName(); // public 'get' method for Player's name
         void startGame(); // playing setter

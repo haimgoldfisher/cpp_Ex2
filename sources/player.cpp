@@ -32,6 +32,10 @@ namespace ariel
         this->cardsTaken += add;
         this->addCardsWon(add);
     }
+    void Player::initTaken()
+    {
+        this->cardsTaken = 0;
+    }
     void Player::setStack(int num)
     {
         this->stackSize = num;

@@ -69,4 +69,9 @@ TEST_CASE("Game Basic Methods TEST:")
     CHECK_NOTHROW(battle.playAll());
     CHECK((p1.stacksize() == 0) + (p2.stacksize() == 0) >= 1); // someone must be out of cards at that point (also both can be)
     CHECK_NOTHROW(battle.printWiner());
+    // TESTS AFTER THE GAME
+    CHECK_THROWS(battle.playTurn()); // game is closed at that point
+    CHECK_THROWS(battle.playAll()); // game is closed at that point
+
+
 }
