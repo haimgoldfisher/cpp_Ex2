@@ -14,15 +14,16 @@ namespace ariel
     {
         if (complete) // flag for empty or full deck
         {
+            this->stack.reserve(52); // since we need only 52 cards
             for (int i = 1; i <= 4; i++) // {EMPTY = 0, CLUBS = 1, DIAMONDS = 2, HEARTS = 3, SPADES = 4}
             {
                 Suit suit = (Suit)i;
                 for (int val = 2; val <= ACE; val++) // 2 to 14
                 {
-                    Card newCard(val, suit);
-                    this->stack.push_back(newCard);
+                    this->stack.emplace_back(val, suit); // insert every card using Card ctor into it's place
                 }
             }
+            stack.shrink_to_fit(); // since we need only 52 cards - no more adding
         }
     }
 
@@ -36,7 +37,7 @@ namespace ariel
         srand(time(0)); // random seed
         for (int i = 0; i < amount; i++)
         {
-            random_shuffle(this->stack.begin(), this->stack.end()); // build-in shuffle function (<algorithm>)
+            random_shuffle(this->stack.begin(), this->stack.end()); // build-in shuffle function (<algorithm>) - using build-in Vector's Iterator
         }
     }
 
@@ -49,8 +50,7 @@ namespace ariel
     
     void Deck::passCard(Deck& other)
     {
-        Card toInsert = this->drawCard(); // draw a card from the deck
-        other.stack.push_back(toInsert); // put it in the other deck
+        other.stack.emplace_back(this->drawCard()); // draw the card from this deck and pass it to other deck
     }
 
     int Deck::getSize()
